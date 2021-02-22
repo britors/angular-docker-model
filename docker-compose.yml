@@ -10,7 +10,25 @@ services:
       - "80:80"
       - "443:443"
     networks:
-      - w3ti
+      - portal-network
+  mysql:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "Secret@Portal!"
+      MYSQL_DATABASE: "portal"
+    container_name: portal_database
+    ports:
+      - "3306:3306"
+    networks:
+      - portal-network
+  rabbit:
+    image: rabbitmq:3-management
+    container_name: portal_rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - portal-network  
 networks:
-  w3ti:
+  portal-network:
     driver: bridge
