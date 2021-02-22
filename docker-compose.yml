@@ -1,0 +1,16 @@
+version: "3"
+services:
+  portal:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    image: britors/angular-model-portal
+    container_name: portal
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - w3ti
+networks:
+  w3ti:
+    driver: bridge
